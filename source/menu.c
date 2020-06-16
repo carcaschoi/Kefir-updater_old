@@ -5,7 +5,7 @@
 #include "touch.h"
 #include "util.h"
 
-#define APP_VERSION "AIO Atmosphere Updater: 1.0.0"
+#define APP_VERSION "AIO Atmosphere Updater: 1.0.1"
 
 void refreshScreen(char loaded)
 {

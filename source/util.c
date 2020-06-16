@@ -75,7 +75,7 @@ void writeAmsVersion()
 
     // write ams version number + hash.
     char amsVersionNum[25];
-    snprintf(g_amsVersionWithoutHash, sizeof(g_amsVersionWithoutHash), "%lu.%lu.%lu", (ver >> 32) & 0xFF,  (ver >> 24) & 0xFF, (ver >> 16) & 0xFF);
+    snprintf(g_amsVersionWithoutHash, sizeof(g_amsVersionWithoutHash), "%lu.%lu.%lu", (ver >> 56) & 0xFF,  (ver >> 48) & 0xFF, (ver >> 40) & 0xFF);
 	snprintf(amsVersionNum, sizeof(amsVersionNum), "%s (%s)", g_amsVersionWithoutHash, shortHash);
 
     // write string + ams version to global variable.
