@@ -26,12 +26,14 @@ __**The app currently has 4 main options.**__
 * Downloads the latest sigpatches.
 * If `/config/BCT.ini` exists in Atmosphere release, it will prompt user asking if they want to overwrite said file as shown here:
 
-![Img](images/example.jpg)
+![Img](images/ams_bct_overwrite.jpg)
 
 **Update Hekate:**
 
 * Installs the latest release of Hekate.
-* Offers to copy **/atmosphere/reboot_payload.bin** to **/bootloader/payloads/reboot_payload.bin** in order to avoid booting to hekate after install with no payloads. If you ran **Update Atmosphere + sigpatches** first, **/atmosphere/reboot_payload.bin** is the latest **fusee-primary.bin**.
+* Offers to replace your **/atmosphere/reboot_payload.bin** with Hekate, making Atmosphere reboot to Hekate. It will offer to copy your current **/atmosphere/reboot_payload.bin** to **/bootloader/payloads/reboot_payload.bin** in order to avoid booting to hekate after install with no payloads. If you ran **Update Atmosphere + sigpatches** first, **/atmosphere/reboot_payload.bin** is the latest **fusee-primary.bin**.
+
+![Img](images/reboot_hekate.jpg)
 
 **Update App:**
 
