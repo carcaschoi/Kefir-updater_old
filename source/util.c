@@ -158,6 +158,9 @@ int parseSearch(char *parse_string, char *filter, char* new_string)
 
 void update_hekate()
 {
+    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Hekate...");
+    drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
+    updateRenderer();
     if (!downloadFile(HEKATE_URL, TEMP_FILE, ON))
     {
         char new_url[MAX_STRLEN];
@@ -167,12 +170,6 @@ void update_hekate()
             {
                 unzip(HEKATE_OUTPUT, UP_HEKATE);
                 remove(HEKATE_OUTPUT);
-                int res = yesNoBox(UP_HEKATE, 325, 250, "Copy reboot payload to payloads?");
-                if (res == YES)
-                {
-                  copyFile("/atmosphere/reboot_payload.bin", "/bootloader/payloads/reboot_payload.bin");
-                  errorBox(330, 250, "Added reboot_payload to hekate");
-                }
             }
         }
     }
@@ -180,6 +177,9 @@ void update_hekate()
 
 void update_sigpatches(int cursor)
 {
+    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Atmosphere...");
+    drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
+    updateRenderer();
     if (!downloadFile(PATCH_URL, PATCH_OUTPUT, OFF))
     {
         unzip(PATCH_OUTPUT, cursor);
@@ -189,6 +189,9 @@ void update_sigpatches(int cursor)
 
 void update_app()
 {
+    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading app update...");
+    drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
+    updateRenderer();
     // download new nro as a tempfile.
     if (!downloadFile(APP_URL, TEMP_FILE, OFF))
     {
