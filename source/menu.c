@@ -5,7 +5,7 @@
 #include "touch.h"
 #include "util.h"
 
-#define APP_VERSION "AIO Atmosphere Updater: 1.0.2"
+#define APP_VERSION "AIO Atmosphere Updater: 1.0.3"
 
 void refreshScreen(char loaded)
 {
@@ -43,10 +43,10 @@ void printOptionList(int cursor)
                                     "Update app", \
                                     "Reboot (reboot to payload)" };
 
-    char *description_list[] = {    "Update Atmosphere with sigpatches", \
-                                    "Update everything for Hekate", \
-                                    "Update app and removes old version", \
-                                    "Reboots switch (recommended after updating)" };
+    char *description_list[] = {    "FAT32 microSD card recommended. ExFAT cards corrupt often.", \
+                                    "Updates Hekate payload, optionally set it as your reboot payload.", \
+                                    "Updates app. Restart app to apply.", \
+                                    "Reboots switch to your current reboot payload." };
 
     SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.hekate_icon, appTextures.app_icon, appTextures.reboot_icon };
 

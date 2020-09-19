@@ -184,6 +184,7 @@ void update_sigpatches(int cursor)
     {
         unzip(PATCH_OUTPUT, cursor);
         remove(PATCH_OUTPUT);
+        errorBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
     }
 }
 
@@ -202,6 +203,6 @@ void update_app()
         // rename the downloaded temp_file with the correct nro name.
         rename(TEMP_FILE, APP_OUTPUT);
         // using errorBox as a message window on this occasion.
-        errorBox(400, 250, "      Update complete!\nRestart app to take effect");
+        errorBox(400, 250, "      Update complete!\nRestart app to take effect!");
     }
 }
