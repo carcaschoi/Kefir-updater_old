@@ -1,6 +1,6 @@
 # Atmosphere-Updater
 
-Update Atmosphere CFW and sigpatches from within your switch!
+Update Atmosphere patches from within your switch!
 
 ![Img](images/example.jpg)
 
@@ -20,17 +20,14 @@ That's it!
 
 __**The app currently has 4 main options.**__
 
-**Update Atmosphere + sigpatches:**
+**Update Atmosphere patches:**
 
-* Downloads the latest Atmosphere release and installs everything from that release. 
-* Downloads the latest sigpatches.
-* If `/config/BCT.ini` exists in Atmosphere release, it will prompt user asking if they want to overwrite said file as shown here:
-
-![Img](images/ams_bct_overwrite.jpg)
+* Downloads the latest Atmosphere patches. 
+* It is no longer possible to update Atmosphere while you are running Atmosphere. [Atmosphere now maintains exclusive access to fusee-secondary archive.](https://github.com/Atmosphere-NX/Atmosphere/commit/5b02c77400e8551199fefdbc36b1eb3ff86374dc)
 
 **Update Hekate:**
 
-* Installs the latest release of Hekate.
+* Installs the latest release of Hekate. The UMS feature may be a convenient way to update Atmosphere now.
 * Offers to replace your **/atmosphere/reboot_payload.bin** with Hekate, making Atmosphere reboot to Hekate. It will offer to copy your current **/atmosphere/reboot_payload.bin** to **/bootloader/payloads/reboot_payload.bin** in order to avoid booting to hekate after install with no payloads. If you ran **Update Atmosphere + sigpatches** first, **/atmosphere/reboot_payload.bin** is the latest **fusee-primary.bin**.
 
 ![Img](images/reboot_hekate.jpg)
@@ -44,7 +41,6 @@ __**The app currently has 4 main options.**__
 
 * Reboots the switch, loading the payload from **/atmosphere/reboot_payload.bin**.
 * This is recommended after install Atmosphere.
-* Updating Atmosphere automatically includes the needed **reboot_payload.bin**.
 
 ----
 

@@ -16,7 +16,7 @@
 
 void writeSysVersion();                                                 // writes the sys version.
 void writeAmsVersion();                                                 // writes the ams version with hash.
-void writeLatestAtmosphereVersion();                                    // writes the latest Atmosphere version.
+void writeLatestAtmosphereVersion();                                    // writes the latest patchable Atmosphere version.
 char *getSysVersion();                                                  // returns sys version.
 char *getAmsVersion();                                                  // returns ams version.
 char *getLatestAtmosphereVersion();                                     // returns the latest Atmosphere version.

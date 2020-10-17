@@ -5,7 +5,7 @@
 #include "touch.h"
 #include "util.h"
 
-#define APP_VERSION "AIO Atmosphere Updater: 1.0.3"
+#define APP_VERSION "Atmosphere Patches Updater: 1.0.4"
 
 void refreshScreen(char loaded)
 {
@@ -38,12 +38,12 @@ void printOptionList(int cursor)
 {
     refreshScreen(/*loaded=*/1);
 
-    char *option_list[]      = {    "Update Atmosphere + sigpatches", \
+    char *option_list[]      = {    "Update Atmosphere patches", \
                                     "Update Hekate", \
                                     "Update app", \
                                     "Reboot (reboot to payload)" };
 
-    char *description_list[] = {    "FAT32 microSD card recommended. ExFAT cards corrupt often.", \
+    char *description_list[] = {    "It is no longer possible to update Atmosphere while it is running.", \
                                     "Updates Hekate payload, optionally set it as your reboot payload.", \
                                     "Updates app. Restart app to apply.", \
                                     "Reboots switch to your current reboot payload." };

@@ -177,7 +177,7 @@ void update_hekate()
 
 void update_sigpatches(int cursor)
 {
-    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Atmosphere...");
+    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading patches...");
     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
     updateRenderer();
     if (!downloadFile(PATCH_URL, PATCH_OUTPUT, OFF))

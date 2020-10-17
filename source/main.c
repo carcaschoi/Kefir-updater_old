@@ -118,7 +118,7 @@ int main(int argc, char **argv)
                 break;
 
             case UP_PATCHES:
-                if (yesNoBox(cursor, 360, 250, "Update Atmosphere + patches?") == YES)
+                if (yesNoBox(cursor, 360, 250, "Update Atmosphere patches?") == YES)
                     update_sigpatches(cursor);
                 break;
 
