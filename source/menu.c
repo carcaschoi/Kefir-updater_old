@@ -5,7 +5,7 @@
 #include "touch.h"
 #include "util.h"
 
-#define APP_VERSION "Atmosphere Patches Updater: 1.0.4"
+#define APP_VERSION "Kefir Updater: 1.0.0"
 
 void refreshScreen(char loaded)
 {
@@ -38,17 +38,15 @@ void printOptionList(int cursor)
 {
     refreshScreen(/*loaded=*/1);
 
-    char *option_list[]      = {    "Update Atmosphere patches", \
-                                    "Update Hekate", \
+    char *option_list[]      = {    "Update kefir", \
                                     "Update app", \
                                     "Reboot (reboot to payload)" };
 
     char *description_list[] = {    "It is no longer possible to update Atmosphere while it is running.", \
-                                    "Updates Hekate payload, optionally set it as your reboot payload.", \
                                     "Updates app. Restart app to apply.", \
                                     "Reboots switch to your current reboot payload." };
 
-    SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.hekate_icon, appTextures.app_icon, appTextures.reboot_icon };
+    SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.app_icon, appTextures.reboot_icon };
 
     for (int i=0, nl=0; i < (CURSOR_LIST_MAX+1); i++, nl+=NEWLINE)
     {

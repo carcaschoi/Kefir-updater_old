@@ -8,9 +8,9 @@ Update Atmosphere patches from within your switch!
 
 ## Install
 
-Download the latest release from [here](https://github.com/JackInTheShop/AIO-atmosphere-updater/releases).
+Download the latest release from [here](https://github.com/JackInTheShop/kefirupdater/releases).
 
-Move the downloaded .nro onto you Nintendo Switch SD Card inside the folder **/switch/AIO-atmosphere-updater/**.
+Move the downloaded .nro onto you Nintendo Switch SD Card inside the folder **/switch/kefirupdater/**.
 
 That's it!
 

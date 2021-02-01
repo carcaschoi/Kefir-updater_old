@@ -112,24 +112,20 @@ int main(int argc, char **argv)
 
             switch (cursor)
             {
-            case UP_HEKATE:
-                if (yesNoBox(cursor, 390, 250, "Update Hekate?") == YES)
-                    update_hekate();
-                break;
 
-            case UP_PATCHES:
-                if (yesNoBox(cursor, 360, 250, "Update Atmosphere patches?") == YES)
-                    update_sigpatches(cursor);
+            case UP_KEFIR:
+                if (yesNoBox(cursor, 360, 250, "Update kefir") == YES)
+                    update_kefir(cursor);
                 break;
 
             case UP_APP:
-                if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
+                if (yesNoBox(cursor, 390, 250, "Update App") == YES)
                     update_app();
                 break;
 
             case REBOOT_PAYLOAD:
-                if (yesNoBox(cursor, 390, 250, "Reboot to Payload?") == YES)
-                    reboot_payload("/atmosphere/reboot_payload.bin");
+                if (yesNoBox(cursor, 390, 250, "Reboot to Payload") == YES)
+                    reboot_payload("/payload.bin");
                 break;
             }
         }

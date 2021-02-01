@@ -70,28 +70,28 @@ int unzip(const char *output, int cursor)
 
             fclose(outfile);
             free(buf);
-            // Reboot to hekate?
-            if (strstr(filename_inzip, "hekate_ctcaer_"))
-            {
-                if(yesNoBox(cursor, 325, 250, "Copy Hekate to reboot_payload?") == YES)
-                {
-                    if (yesNoBox(UP_HEKATE, 325, 250, "Copy current payload to payloads?") == YES)
-                    {
-                        // check if directory exists
-                        DIR *dir = opendir("/bootloader/payloads/");
-                        if (dir) closedir(dir);
-                        else
-                        {
-                            mkdir("/bootloader/", 0777);
-                            mkdir("/bootloader/payloads/", 0777);
-                        }
-                        copyFile("/atmosphere/reboot_payload.bin", "/bootloader/payloads/reboot_payload.bin");
-                        errorBox(330, 250, "Added reboot_payload to hekate");
-                    }
-                    copyFile(filename_inzip,"/atmosphere/reboot_payload.bin");
-                    errorBox(330, 250, "Added hekate to reboot_payload");
-                }
-            }
+            // // Reboot to hekate?
+            // if (strstr(filename_inzip, "hekate_ctcaer_"))
+            // {
+            //     if(yesNoBox(cursor, 325, 250, "Copy Hekate to reboot_payload?") == YES)
+            //     {
+            //         if (yesNoBox(UP_HEKATE, 325, 250, "Copy current payload to payloads?") == YES)
+            //         {
+            //             // check if directory exists
+            //             DIR *dir = opendir("/bootloader/payloads/");
+            //             if (dir) closedir(dir);
+            //             else
+            //             {
+            //                 mkdir("/bootloader/", 0777);
+            //                 mkdir("/bootloader/payloads/", 0777);
+            //             }
+            //             copyFile("/atmosphere/reboot_payload.bin", "/bootloader/payloads/reboot_payload.bin");
+            //             errorBox(330, 250, "Added reboot_payload to hekate");
+            //         }
+            //         copyFile(filename_inzip,"/atmosphere/reboot_payload.bin");
+            //         errorBox(330, 250, "Added hekate to reboot_payload");
+            //     }
+            // }
         }
 
         updateRenderer();

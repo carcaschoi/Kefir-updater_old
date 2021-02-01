@@ -8,7 +8,7 @@
 #include "download.h"
 #include "reboot_payload.h"
 
-#define TEMP_FILE                 "/switch/AIO-atmosphere-updater/temp"
+#define TEMP_FILE                 "/switch/kefirupdater/temp"
 #define FILTER_STRING             "browser_download_url\":\""
 #define VERSION_FILTER_STRING     "tag_name\":\""
 
@@ -156,35 +156,37 @@ int parseSearch(char *parse_string, char *filter, char* new_string)
     return 1;
 }
 
-void update_hekate()
-{
-    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Hekate...");
-    drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
-    updateRenderer();
-    if (!downloadFile(HEKATE_URL, TEMP_FILE, ON))
-    {
-        char new_url[MAX_STRLEN];
-        if (!parseSearch(TEMP_FILE, FILTER_STRING, new_url))
-        {
-            if (!downloadFile(new_url, HEKATE_OUTPUT, OFF))
-            {
-                unzip(HEKATE_OUTPUT, UP_HEKATE);
-                remove(HEKATE_OUTPUT);
-            }
-        }
-    }
-}
+// void update_hekate()
+// {
+//     popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Hekate...");
+//     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
+//     updateRenderer();
+//     if (!downloadFile(HEKATE_URL, TEMP_FILE, ON))
+//     {
+//         char new_url[MAX_STRLEN];
+//         if (!parseSearch(TEMP_FILE, FILTER_STRING, new_url))
+//         {
+//             if (!downloadFile(new_url, HEKATE_OUTPUT, OFF))
+//             {
+//                 unzip(HEKATE_OUTPUT, UP_HEKATE);
+//                 remove(HEKATE_OUTPUT);
+//             }
+//         }
+//     }
+// }
 
-void update_sigpatches(int cursor)
+void update_kefir(int cursor)
 {
-    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading patches...");
+    popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading kefir...");
     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
     updateRenderer();
-    if (!downloadFile(PATCH_URL, PATCH_OUTPUT, OFF))
+    if (!downloadFile(KEFIR_URL, KEFIR_OUTPUT, OFF))
     {
-        unzip(PATCH_OUTPUT, cursor);
-        remove(PATCH_OUTPUT);
+        unzip(KEFIR_OUTPUT, cursor);
+        remove(KEFIR_OUTPUT);
         errorBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
+         if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
+                    reboot_payload("/payload.bin");
     }
 }
 
