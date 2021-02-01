@@ -18,7 +18,7 @@ void refreshScreen(char loaded)
     drawText(appFonts.fntSmall, 25, 150, SDL_GetColour(white), getSysVersion());
 
     // atmosphere version.
-    drawText(appFonts.fntSmall, 25, 230, SDL_GetColour(white), getAmsVersion());
+    drawText(appFonts.fntSmall, 25, 200, SDL_GetColour(white), getKefVersion());
 
     if (loaded)
     {

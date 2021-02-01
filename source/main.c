@@ -64,7 +64,8 @@ int main(int argc, char **argv)
 
     // write sys / ams version to char*.
     writeSysVersion();
-    writeAmsVersion();
+    writeKefVersion();
+    // writeAmsVersion();
     refreshScreen(/*loaded=*/0);
     updateRenderer();
     writeLatestAtmosphereVersion();

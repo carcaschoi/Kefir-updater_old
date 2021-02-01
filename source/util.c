@@ -13,25 +13,14 @@
 #define VERSION_FILTER_STRING     "tag_name\":\""
 
 char g_sysVersion[50];
-char g_amsVersion[50];
+char g_kefVersion[50];
 char g_amsVersionWithoutHash[15];
 char g_latestAtmosphereVersion[50];
 
 
-char *getSysVersion()
-{
-    return g_sysVersion;
-}
-
-char *getAmsVersion()
-{
-    return g_amsVersion;
-}
-
-char *getLatestAtmosphereVersion()
-{
-    return g_latestAtmosphereVersion;
-}
+char *getSysVersion(){return g_sysVersion;}
+char *getKefVersion(){return g_kefVersion;} 
+char *getLatestAtmosphereVersion(){return g_latestAtmosphereVersion;}
 
 void writeSysVersion()
 {
@@ -49,38 +38,56 @@ void writeSysVersion()
     snprintf(g_sysVersion, sizeof(g_sysVersion), "Firmware Ver: %s", sysVersionBuffer);
 }
 
-void writeAmsVersion()
+// void writeAmsVersion()
+// {
+// 	Result ret = 0;
+// 	u64 ver;
+//     u64 fullHash;
+//     SplConfigItem SplConfigItem_ExosphereVersion = (SplConfigItem)65000;
+//     SplConfigItem SplConfigItem_ExosphereVerHash = (SplConfigItem)65003;
+
+// 	if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVersion, &ver)))
+//     {
+// 		printf("SplConfigItem_ExosphereVersion() failed: 0x%x.\n\n", ret);
+// 		return;
+// 	}
+
+//     if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVerHash, &fullHash)))
+//     {
+// 		printf("SplConfigItem_ExosphereVerHash() failed: 0x%x.\n\n", ret);
+// 		return;
+// 	}
+
+//     // write only the first 8 char of the hash.
+//     char shortHash[8];
+// 	snprintf(shortHash, sizeof(shortHash), "%lx", fullHash);
+
+//     // write ams version number + hash.
+//     char amsVersionNum[25];
+//     snprintf(g_amsVersionWithoutHash, sizeof(g_amsVersionWithoutHash), "%lu.%lu.%lu", (ver >> 56) & 0xFF,  (ver >> 48) & 0xFF, (ver >> 40) & 0xFF);
+// 	snprintf(amsVersionNum, sizeof(amsVersionNum), "%s (%s)", g_amsVersionWithoutHash, shortHash);
+
+//     // write string + ams version to global variable.
+//     snprintf(g_amsVersion, sizeof(g_amsVersion), "Atmosphere Ver: %s", amsVersionNum);
+// }
+
+void writeKefVersion()
 {
-	Result ret = 0;
-	u64 ver;
-    u64 fullHash;
-    SplConfigItem SplConfigItem_ExosphereVersion = (SplConfigItem)65000;
-    SplConfigItem SplConfigItem_ExosphereVerHash = (SplConfigItem)65003;
-
-	if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVersion, &ver)))
-    {
-		printf("SplConfigItem_ExosphereVersion() failed: 0x%x.\n\n", ret);
-		return;
-	}
-
-    if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVerHash, &fullHash)))
-    {
-		printf("SplConfigItem_ExosphereVerHash() failed: 0x%x.\n\n", ret);
-		return;
-	}
-
-    // write only the first 8 char of the hash.
-    char shortHash[8];
-	snprintf(shortHash, sizeof(shortHash), "%lx", fullHash);
-
-    // write ams version number + hash.
-    char amsVersionNum[25];
-    snprintf(g_amsVersionWithoutHash, sizeof(g_amsVersionWithoutHash), "%lu.%lu.%lu", (ver >> 56) & 0xFF,  (ver >> 48) & 0xFF, (ver >> 40) & 0xFF);
-	snprintf(amsVersionNum, sizeof(amsVersionNum), "%s (%s)", g_amsVersionWithoutHash, shortHash);
-
-    // write string + ams version to global variable.
-    snprintf(g_amsVersion, sizeof(g_amsVersion), "Atmosphere Ver: %s", amsVersionNum);
+    
+    FILE *fp;
+    char kefir_local[128];
+    if ((fp=fopen(KEF_LOCAL, "r") )==NULL) {
+        printf("Cannot open file.\n");
+        exit (1);
+    }
+    while(!feof (fp)) {
+        fgets(kefir_local, 126, fp);
+    }
+    fclose(fp);  
+    
+    snprintf(g_kefVersion, sizeof(g_kefVersion), "Kefir: %s", kefir_local);
 }
+
 
 void writeLatestAtmosphereVersion()
 {

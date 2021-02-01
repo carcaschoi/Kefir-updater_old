@@ -16,12 +16,13 @@
 #define OFF                     0
 
 void writeSysVersion();                                                 // writes the sys version.
-void writeAmsVersion();                                                 // writes the ams version with hash.
+// void writeAmsVersion();                                                 // writes the ams version with hash.
 void writeLatestAtmosphereVersion();                                    // writes the latest patchable Atmosphere version.
 char *getSysVersion();                                                  // returns sys version.
 char *getAmsVersion();                                                  // returns ams version.
 char *getLatestAtmosphereVersion();                                     // returns the latest Atmosphere version.
 void writeKefVersion();                                                 // writes the kefir version with hash.
+char *getKefVersion();                                                  // returns ams version.
 
 void copyFile(char *src, char *dest);                                   // basic copy file. Use malloc if you need dynamic mem
 int parseSearch(char *phare_string, char *filter, char* new_string);    // hacky way to parse a file for a string
