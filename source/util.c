@@ -8,104 +8,88 @@
 #include "download.h"
 #include "reboot_payload.h"
 
-#define TEMP_FILE                 "/switch/kefirupdater/temp"
-#define FILTER_STRING             "browser_download_url\":\""
-#define VERSION_FILTER_STRING     "tag_name\":\""
+#define TEMP_FILE "/switch/kefirupdater/temp"
+#define FILTER_STRING "browser_download_url\":\""
+#define VERSION_FILTER_STRING "tag_name\":\""
 
 char g_sysVersion[50];
 char g_kefVersion[50];
 char g_amsVersionWithoutHash[15];
-char g_latestAtmosphereVersion[50];
+char g_latestKefirVersion[50];
 
-
-char *getSysVersion(){return g_sysVersion;}
-char *getKefVersion(){return g_kefVersion;} 
-char *getLatestAtmosphereVersion(){return g_latestAtmosphereVersion;}
+char *getSysVersion() { return g_sysVersion; }
+char *getKefVersion() { return g_kefVersion; }
+char *getLatestKefirVersion() { return g_latestKefirVersion; }
 
 void writeSysVersion()
 {
-	Result ret = 0;
-	SetSysFirmwareVersion ver;
+    Result ret = 0;
+    SetSysFirmwareVersion ver;
 
-	if (R_FAILED(ret = setsysGetFirmwareVersion(&ver)))
+    if (R_FAILED(ret = setsysGetFirmwareVersion(&ver)))
     {
-		printf("GetFirmwareVersion() failed: 0x%x.\n\n", ret);
-		return;
-	}
+        printf("GetFirmwareVersion() failed: 0x%x.\n\n", ret);
+        return;
+    }
 
     char sysVersionBuffer[20];
-	snprintf(sysVersionBuffer, 20, "%u.%u.%u", ver.major, ver.minor, ver.micro);
+    snprintf(sysVersionBuffer, 20, "%u.%u.%u", ver.major, ver.minor, ver.micro);
     snprintf(g_sysVersion, sizeof(g_sysVersion), "Firmware Ver: %s", sysVersionBuffer);
 }
 
-// void writeAmsVersion()
-// {
-// 	Result ret = 0;
-// 	u64 ver;
-//     u64 fullHash;
-//     SplConfigItem SplConfigItem_ExosphereVersion = (SplConfigItem)65000;
-//     SplConfigItem SplConfigItem_ExosphereVerHash = (SplConfigItem)65003;
-
-// 	if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVersion, &ver)))
-//     {
-// 		printf("SplConfigItem_ExosphereVersion() failed: 0x%x.\n\n", ret);
-// 		return;
-// 	}
-
-//     if (R_FAILED(ret = splGetConfig(SplConfigItem_ExosphereVerHash, &fullHash)))
-//     {
-// 		printf("SplConfigItem_ExosphereVerHash() failed: 0x%x.\n\n", ret);
-// 		return;
-// 	}
-
-//     // write only the first 8 char of the hash.
-//     char shortHash[8];
-// 	snprintf(shortHash, sizeof(shortHash), "%lx", fullHash);
-
-//     // write ams version number + hash.
-//     char amsVersionNum[25];
-//     snprintf(g_amsVersionWithoutHash, sizeof(g_amsVersionWithoutHash), "%lu.%lu.%lu", (ver >> 56) & 0xFF,  (ver >> 48) & 0xFF, (ver >> 40) & 0xFF);
-// 	snprintf(amsVersionNum, sizeof(amsVersionNum), "%s (%s)", g_amsVersionWithoutHash, shortHash);
-
-//     // write string + ams version to global variable.
-//     snprintf(g_amsVersion, sizeof(g_amsVersion), "Atmosphere Ver: %s", amsVersionNum);
-// }
-
 void writeKefVersion()
 {
-    
+
     FILE *fp;
     char kefir_local[128];
-    if ((fp=fopen(KEF_LOCAL, "r") )==NULL) {
+    if ((fp = fopen(KEF_LOCAL, "r")) == NULL)
+    {
         printf("Cannot open file.\n");
-        exit (1);
+        exit(1);
     }
-    while(!feof (fp)) {
+    while (!feof(fp))
+    {
         fgets(kefir_local, 126, fp);
     }
-    fclose(fp);  
-    
+    fclose(fp);
+
     snprintf(g_kefVersion, sizeof(g_kefVersion), "Kefir: %s", kefir_local);
 }
 
-
-void writeLatestAtmosphereVersion()
+void writeLatestKefirVersion()
 {
-  // Download the github API file and then parse out the version number.
-  char *updateString = "- Up to date";
-  if (!downloadFile(AMS_URL, TEMP_FILE, ON))
-  {
-    char latestVersionNumber[10];
-    if (!parseSearch(TEMP_FILE, VERSION_FILTER_STRING, latestVersionNumber)) {
-      if (strcmp(g_amsVersionWithoutHash, latestVersionNumber) != 0)
-      {
-        char buffer[50];
-        snprintf(buffer, sizeof(buffer), "- Update available: %s", latestVersionNumber);
-        updateString = buffer;
-      }
+
+    typedef enum
+    {
+        F,
+        T
+    } boolean;
+
+    // Download the github API file and then parse out the version number.
+    char *updateString = "- Up to date";
+    boolean is_update = F;
+
+    if (!downloadFile(AMS_URL, TEMP_FILE, ON))
+    {
+        char latestVersionNumber[10];
+        if (!parseSearch(TEMP_FILE, VERSION_FILTER_STRING, latestVersionNumber))
+        {
+            char buffer[50];
+            snprintf(buffer, sizeof(buffer), "- Update available: %s", latestVersionNumber);
+
+            // char kefirUpdateString = "kefir%s available. Update?", latestVersionNumber;
+
+            // if (yesNoBox(UP_KEFIR, 360, 250, "New kefir version available. Update?") == YES){update_kefir(UP_KEFIR);}
+            is_update = T;
+            updateString = buffer;
+        }
     }
-  }
-  snprintf(g_latestAtmosphereVersion, sizeof(g_latestAtmosphereVersion), updateString);
+    else
+    {
+        errorBox(350, 250, "Check internet connection");
+        updateString = "Check internet connection";
+    }
+    snprintf(g_latestKefirVersion, sizeof(g_latestKefirVersion), updateString);
 }
 
 void copyFile(char *src, char *dest)
@@ -127,7 +111,7 @@ void copyFile(char *src, char *dest)
     fclose(newfile);
 }
 
-int parseSearch(char *parse_string, char *filter, char* new_string)
+int parseSearch(char *parse_string, char *filter, char *new_string)
 {
     FILE *fp = fopen(parse_string, "r");
 
@@ -146,7 +130,7 @@ int parseSearch(char *parse_string, char *filter, char* new_string)
                         for (int j = 0; c != '\"'; j++)
                         {
                             new_string[j] = c;
-                            new_string[j+1] = '\0';
+                            new_string[j + 1] = '\0';
                             c = fgetc(fp);
                         }
                         fclose(fp);
@@ -163,38 +147,21 @@ int parseSearch(char *parse_string, char *filter, char* new_string)
     return 1;
 }
 
-// void update_hekate()
-// {
-//     popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading Hekate...");
-//     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
-//     updateRenderer();
-//     if (!downloadFile(HEKATE_URL, TEMP_FILE, ON))
-//     {
-//         char new_url[MAX_STRLEN];
-//         if (!parseSearch(TEMP_FILE, FILTER_STRING, new_url))
-//         {
-//             if (!downloadFile(new_url, HEKATE_OUTPUT, OFF))
-//             {
-//                 unzip(HEKATE_OUTPUT, UP_HEKATE);
-//                 remove(HEKATE_OUTPUT);
-//             }
-//         }
-//     }
-// }
-
 void update_kefir(int cursor)
 {
     popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading kefir...");
     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
     updateRenderer();
-    if (!downloadFile(KEFIR_URL, KEFIR_OUTPUT, OFF))
-    {
-        unzip(KEFIR_OUTPUT, cursor);
-        remove(KEFIR_OUTPUT);
-        errorBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
-         if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
-                    reboot_payload("/payload.bin");
-    }
+    unzip(KEFIR_OUTPUT, cursor);
+
+    // if (!downloadFile(KEFIR_URL, KEFIR_OUTPUT, OFF))
+    // {
+    //     unzip(KEFIR_OUTPUT, cursor);
+    //     remove(KEFIR_OUTPUT);
+    //     errorBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
+    //     if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
+    //     reboot_payload("/payload.bin");
+    // }
 }
 
 void update_app()

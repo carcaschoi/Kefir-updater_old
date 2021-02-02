@@ -17,13 +17,13 @@ void refreshScreen(char loaded)
     // system version.
     drawText(appFonts.fntSmall, 25, 150, SDL_GetColour(black), getSysVersion());
 
-    // atmosphere version.
+    // kefir version.
     drawText(appFonts.fntSmall, 25, 200, SDL_GetColour(black), getKefVersion());
 
     if (loaded)
     {
       // write the latest version number, if an update is available
-      drawText(appFonts.fntSmall, 25, 260, SDL_GetColour(black), getLatestAtmosphereVersion());
+      drawText(appFonts.fntSmall, 25, 260, SDL_GetColour(black), getLatestKefirVersion());
 
       //drawText(appFonts.fntMedium, 120, 225, SDL_GetColour(black), "Menu Here"); // menu options
       drawButton(appFonts.fntButton, BUTTON_A, 970, 672, SDL_GetColour(black));

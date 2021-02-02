@@ -41,11 +41,11 @@ int counter = tv.tv_usec / 100000;
 if (counter == 0 || counter == 2 || counter == 4 || counter == 6 || counter == 8)
 {
 printOptionList(0);
-popUpBox(appFonts.fntSmall, 350, 250, SDL_GetColour(white), "Downloading...");
+popUpBox(appFonts.fntSmall, POS_X-40, POS_Y, SDL_GetColour(black), "Downloading...");
 // bar max size
-drawShape(SDL_GetColour(white), 380, 380, DOWNLOAD_BAR_MAX, 30);
+drawShape(SDL_GetColour(dark_grey), POS_X-10, POS_Y+130, DOWNLOAD_BAR_MAX, 30);
 // progress bar being filled
-drawShape(SDL_GetColour(faint_blue), 380, 380, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
+drawShape(SDL_GetColour(faint_blue), POS_X-10, POS_Y+130, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
 
 updateRenderer();
 }

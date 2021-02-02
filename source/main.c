@@ -65,10 +65,9 @@ int main(int argc, char **argv)
     // write sys / ams version to char*.
     writeSysVersion();
     writeKefVersion();
-    // writeAmsVersion();
     refreshScreen(/*loaded=*/0);
     updateRenderer();
-    writeLatestAtmosphereVersion();
+    writeLatestKefirVersion();
 
     // set the cursor position to 0.
     short cursor = 0;
@@ -115,17 +114,17 @@ int main(int argc, char **argv)
             {
 
             case UP_KEFIR:
-                if (yesNoBox(cursor, 360, 250, "Update kefir") == YES)
+                if (yesNoBox(cursor, 360, 250, "Update kefir?") == YES)
                     update_kefir(cursor);
                 break;
 
             case UP_APP:
-                if (yesNoBox(cursor, 390, 250, "Update App") == YES)
+                if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
                     update_app();
                 break;
 
             case REBOOT_PAYLOAD:
-                if (yesNoBox(cursor, 390, 250, "Reboot to Payload") == YES)
+                if (yesNoBox(cursor, 390, 250, "Reboot to Payload?") == YES)
                     reboot_payload("/payload.bin");
                 break;
             }

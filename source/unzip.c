@@ -45,6 +45,8 @@ int unzip(const char *output, int cursor)
         else
         {
             const char *write_filename = filename_inzip;
+            // strncpy(write_filename, filename_inzip, 50)
+
             void *buf = malloc(WRITEBUFFERSIZE);
 
             FILE *outfile = fopen(write_filename, "wb");
@@ -68,6 +70,6 @@ int unzip(const char *output, int cursor)
     }
 
     unzClose(zfile);
-    remove(output);
+    // remove(output);
     return 0;
 }
