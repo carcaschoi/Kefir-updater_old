@@ -20,7 +20,7 @@ int unzip(const char *output, int cursor)
     for (int i = 0; i < gi.number_entry; i++)
     {
         printOptionList(cursor);
-        popUpBox(appFonts.fntSmall, 350, 250, SDL_GetColour(white), "Unzipping...");
+        popUpBox(appFonts.fntMedium_small, POS_X, POS_Y, SDL_GetColour(black), "Unzipping...");
 
         char filename_inzip[MAXFILENAME];
         unz_file_info file_info;
@@ -28,20 +28,6 @@ int unzip(const char *output, int cursor)
         unzOpenCurrentFile(zfile);
         unzGetCurrentFileInfo(zfile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
 
-        // prevents /config/BCT.ini from be overwritten
-        if (strstr(filename_inzip, "/config/BCT.ini"))
-        {
-            FILE *f = fopen(filename_inzip, "r");
-            if (f)
-            {
-                if(yesNoBox(cursor, 390, 250, "Overwrite BCT.ini?") == NO)
-                {
-                    fclose(f);
-                    goto jump_to_end;
-                }
-            }
-            fclose(f);
-        }
 
         // check if the string ends with a /, if so, then its a directory.
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
@@ -51,7 +37,7 @@ int unzip(const char *output, int cursor)
             if (dir) closedir(dir);
             else
             {
-                drawText(appFonts.fntSmall, 325, 350, SDL_GetColour(white), filename_inzip);
+                drawText(appFonts.fntTiny, POS_X, POS_Y+100, SDL_GetColour(black), filename_inzip);
                 mkdir(filename_inzip, 0777);
             }
         }
@@ -63,36 +49,16 @@ int unzip(const char *output, int cursor)
 
             FILE *outfile = fopen(write_filename, "wb");
 
-            drawText(appFonts.fntSmall, 350, 350, SDL_GetColour(white), write_filename);
+            drawText(appFonts.fntTiny, POS_X, POS_Y+100, SDL_GetColour(black), write_filename);
 
             for (int j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE); j > 0; j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE))
                 fwrite(buf, 1, j, outfile);
 
             fclose(outfile);
             free(buf);
-            // // Reboot to hekate?
-            // if (strstr(filename_inzip, "hekate_ctcaer_"))
-            // {
-            //     if(yesNoBox(cursor, 325, 250, "Copy Hekate to reboot_payload?") == YES)
-            //     {
-            //         if (yesNoBox(UP_HEKATE, 325, 250, "Copy current payload to payloads?") == YES)
-            //         {
-            //             // check if directory exists
-            //             DIR *dir = opendir("/bootloader/payloads/");
-            //             if (dir) closedir(dir);
-            //             else
-            //             {
-            //                 mkdir("/bootloader/", 0777);
-            //                 mkdir("/bootloader/payloads/", 0777);
-            //             }
-            //             copyFile("/atmosphere/reboot_payload.bin", "/bootloader/payloads/reboot_payload.bin");
-            //             errorBox(330, 250, "Added reboot_payload to hekate");
-            //         }
-            //         copyFile(filename_inzip,"/atmosphere/reboot_payload.bin");
-            //         errorBox(330, 250, "Added hekate to reboot_payload");
-            //     }
-            // }
         }
+
+        
 
         updateRenderer();
 

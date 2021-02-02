@@ -5,61 +5,51 @@
 
 #include "download.h"
 #include "menu.h"
-#include "util.h"           // for ON / OFF defines.
+#include "util.h" // for ON / OFF defines.
 
-#define API_AGENT           "JITS"
-#define DOWNLOAD_BAR_MAX    500
+#define API_AGENT "ITotalJustice"
+#define DOWNLOAD_BAR_MAX 500
 
 struct MemoryStruct
 {
-  char *memory;
-  size_t size;
-  int mode;
+FILE *fp;
+size_t size;
+int mode;
 };
 
 static size_t write_memory_callback(void *contents, size_t size, size_t nmemb, void *userdata)
 {
-  size_t realsize = size * nmemb;
-  struct MemoryStruct *mem = (struct MemoryStruct *)userdata;
+size_t realsize = size * nmemb;
+struct MemoryStruct *mem = (struct MemoryStruct *)userdata;
 
-  char *ptr = realloc(mem->memory, mem->size + realsize + 1);
+fwrite(contents, 1, realsize, mem->fp);
+mem->size += realsize;
 
-  if (ptr == NULL)
-  {
-      errorBox(350, 250, "Out of Memory! Don't use applet mode!");
-      return 0;
-  }
-
-  mem->memory = ptr;
-  memcpy(&(mem->memory[mem->size]), contents, realsize);
-  mem->size += realsize;
-  mem->memory[mem->size] = 0;
-
-  return realsize;
+return realsize;
 }
 
 int download_progress(void *p, double dltotal, double dlnow, double ultotal, double ulnow)
 {
-    // if file empty or download hasn't started, exit.
-    if (dltotal <= 0.0) return 0;
+// if file empty or download hasn't started, exit.
+if (dltotal <= 0.0) return 0;
 
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    int counter = tv.tv_usec / 100000;
+struct timeval tv;
+gettimeofday(&tv, NULL);
+int counter = tv.tv_usec / 100000;
 
-    // update progress bar every so often.
-    if (counter == 0 || counter == 2 || counter == 4 || counter == 6 || counter == 8)
-    {
-        printOptionList(0);
-        popUpBox(appFonts.fntSmall, 350, 250, SDL_GetColour(white), "Downloading...");
-        // bar max size
-        drawShape(SDL_GetColour(white), 380, 380, DOWNLOAD_BAR_MAX, 30);
-        // progress bar being filled
-        drawShape(SDL_GetColour(faint_blue), 380, 380, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
+// update progress bar every so often.
+if (counter == 0 || counter == 2 || counter == 4 || counter == 6 || counter == 8)
+{
+printOptionList(0);
+popUpBox(appFonts.fntSmall, 350, 250, SDL_GetColour(white), "Downloading...");
+// bar max size
+drawShape(SDL_GetColour(white), 380, 380, DOWNLOAD_BAR_MAX, 30);
+// progress bar being filled
+drawShape(SDL_GetColour(faint_blue), 380, 380, (dlnow / dltotal) * DOWNLOAD_BAR_MAX, 30);
 
-        updateRenderer();
-    }
-	return 0;
+updateRenderer();
+}
+return 0;
 }
 
 int downloadFile(const char *url, const char *output, int api_mode)
@@ -67,11 +57,10 @@ int downloadFile(const char *url, const char *output, int api_mode)
     CURL *curl = curl_easy_init();
     if (curl)
     {
-        FILE *fp = fopen(output, "wb");
-        if (fp)
+        struct MemoryStruct chunk;
+        chunk.fp = fopen(output, "wb");
+        if (chunk.fp)
         {
-            struct MemoryStruct chunk;
-            chunk.memory = malloc(1);
             chunk.size = 0;
 
             curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -87,24 +76,21 @@ int downloadFile(const char *url, const char *output, int api_mode)
             // progress calls, ssl still slow
             if (api_mode == OFF)
             {
-                curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
-                curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, download_progress);
+            curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+            curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, download_progress);
             }
 
             // execute curl, save result
             CURLcode res = curl_easy_perform(curl);
 
-            // write from mem to file
-            fwrite(chunk.memory, 1, chunk.size, fp);
 
             // clean
             curl_easy_cleanup(curl);
-            free(chunk.memory);
-            fclose(fp);
+            fclose(chunk.fp);
 
             if (res == CURLE_OK) return 0;
         }
-        fclose(fp);
+        //fclose(fp);
     }
 
     errorBox(350, 250, "Download failed...");

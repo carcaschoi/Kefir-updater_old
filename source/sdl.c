@@ -13,9 +13,9 @@ static SDL_Window *main_window;
 static SDL_Renderer *main_renderer;
 
 SDL_Colour colours[] = {
-    { 255, 255, 255 },          //white
-    { 140, 140, 140, 255 },     //grey
     { 0, 0, 0 },                //black
+    { 97, 115, 255 },           //faint blue
+    { 255, 255, 255 },          //white
     { 255, 192, 203 },          //pink
     { 255, 165, 0 },            //orange
     { 255, 255, 0 },            //yellow
@@ -27,9 +27,9 @@ SDL_Colour colours[] = {
     { 28, 33, 73 },             //dark blue
     { 160, 32, 240 },           //purple
     { 81, 81, 81 },             //dark grey
-    { 131, 177, 218 },          //jordy blue
-    { 97, 115, 255 }            //faint blue
-    };
+    { 124, 124, 124 },          //not so dark grey
+    { 160, 159, 159, 255 }      //grey
+};
 
 SDL_Colour SDL_GetColour(int colour_option)
 {
@@ -117,7 +117,9 @@ void loadFonts()
     plGetSharedFontByType(&font, PlSharedFontType_Standard);
     plGetSharedFontByType(&button_data, PlSharedFontType_NintendoExt);
 
+    appFonts.fntTiny         = TTF_OpenFontRW(SDL_RWFromMem(font.address, font.size), 1, 23);
     appFonts.fntSmall        = TTF_OpenFontRW(SDL_RWFromMem(font.address, font.size), 1, 28);
+    appFonts.fntMedium_small = TTF_OpenFontRW(SDL_RWFromMem(font.address, font.size), 1, 33);
     appFonts.fntMedium       = TTF_OpenFontRW(SDL_RWFromMem(font.address, font.size), 1, 36);
     appFonts.fntLarge        = TTF_OpenFontRW(SDL_RWFromMem(font.address, font.size), 1, 48);
     appFonts.fntButton       = TTF_OpenFontRW(SDL_RWFromMem(button_data.address, button_data.size), 1, 30);

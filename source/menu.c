@@ -12,25 +12,25 @@ void refreshScreen(char loaded)
     clearRenderer();
 
     // app version.
-    drawText(appFonts.fntMedium, 40, 40, SDL_GetColour(white), APP_VERSION);
+    drawText(appFonts.fntMedium, 40, 40, SDL_GetColour(black), APP_VERSION);
 
     // system version.
-    drawText(appFonts.fntSmall, 25, 150, SDL_GetColour(white), getSysVersion());
+    drawText(appFonts.fntSmall, 25, 150, SDL_GetColour(black), getSysVersion());
 
     // atmosphere version.
-    drawText(appFonts.fntSmall, 25, 200, SDL_GetColour(white), getKefVersion());
+    drawText(appFonts.fntSmall, 25, 200, SDL_GetColour(black), getKefVersion());
 
     if (loaded)
     {
       // write the latest version number, if an update is available
-      drawText(appFonts.fntSmall, 25, 260, SDL_GetColour(white), getLatestAtmosphereVersion());
+      drawText(appFonts.fntSmall, 25, 260, SDL_GetColour(black), getLatestAtmosphereVersion());
 
-      //drawText(fntMedium, 120, 225, SDL_GetColour(white), "Menu Here"); // menu options
-      drawButton(appFonts.fntButton, BUTTON_A, 970, 672, SDL_GetColour(white));
-      drawText(appFonts.fntSmall, 1010, 675, SDL_GetColour(white), "Select");
+      //drawText(appFonts.fntMedium, 120, 225, SDL_GetColour(black), "Menu Here"); // menu options
+      drawButton(appFonts.fntButton, BUTTON_A, 970, 672, SDL_GetColour(black));
+      drawText(appFonts.fntSmall, 1010, 675, SDL_GetColour(black), "Select");
 
-      drawButton(appFonts.fntButton, BUTTON_PLUS, 1145, 672, SDL_GetColour(white));
-      drawText(appFonts.fntSmall, 1185, 675, SDL_GetColour(white), "Exit");
+      drawButton(appFonts.fntButton, BUTTON_PLUS, 1145, 672, SDL_GetColour(black));
+      drawText(appFonts.fntSmall, 1185, 675, SDL_GetColour(black), "Exit");
     }
 }
 
@@ -42,7 +42,7 @@ void printOptionList(int cursor)
                                     "Update app", \
                                     "Reboot (reboot to payload)" };
 
-    char *description_list[] = {    "It is no longer possible to update Atmosphere while it is running.", \
+    char *description_list[] = {    "Update kefir to latest", \
                                     "Updates app. Restart app to apply.", \
                                     "Reboots switch to your current reboot payload." };
 
@@ -50,17 +50,17 @@ void printOptionList(int cursor)
 
     for (int i=0, nl=0; i < (CURSOR_LIST_MAX+1); i++, nl+=NEWLINE)
     {
-        if (cursor != i) drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(white), option_list[i]);
+        if (cursor != i) drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(black), option_list[i]);
         else
         {
             // icon for the option selected.
             drawImage(textureArray[i], 125, 350);
             // highlight box.
-            drawShape(SDL_GetColour(dark_blue), 530, (FIRST_LINE + nl - HIGHLIGHT_BOX_MIN), 700, HIGHLIGHT_BOX_MAX);
+            drawShape(SDL_GetColour(dark_grey), 530, (FIRST_LINE + nl - HIGHLIGHT_BOX_MIN), 700, HIGHLIGHT_BOX_MAX);
             // option text.
-            drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(jordy_blue), option_list[i]);
+            drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(grey), option_list[i]);
             // description.
-            drawText(appFonts.fntSmall, 25, 675, SDL_GetColour(white), description_list[i]);
+            drawText(appFonts.fntSmall, 25, 675, SDL_GetColour(black), description_list[i]);
         }
     }
 }
@@ -70,24 +70,34 @@ void popUpBox(TTF_Font *font, int x, int y, SDL_Colour colour, char *text)
     // outline. box
     drawShape(SDL_GetColour(black), (SCREEN_W/4)-5, (SCREEN_H/4)-5, (SCREEN_W/2)+10, (SCREEN_H/2)+10);
     // popup box.
-    drawShape(SDL_GetColour(dark_blue), SCREEN_W/4, SCREEN_H/4, SCREEN_W/2, SCREEN_H/2);
+    drawShape(SDL_GetColour(not_so_dark_grey), SCREEN_W/4, SCREEN_H/4, SCREEN_W/2, SCREEN_H/2);
     // text to draw.
     drawText(font, x, y, colour, text);
+}
+
+void no_button(){
+    drawShape(SDL_GetColour(dark_grey), YES_POS_X, BT_POS_Y, BT_SIZE_W, BT_SIZE_H);
+    drawButton(appFonts.fntButtonBig, BUTTON_A, (YES_POS_X+42), (BT_POS_Y+15), SDL_GetColour(grey));
+    drawText(appFonts.fntMedium, (YES_POS_X+91), (BT_POS_Y+15), SDL_GetColour(grey), "Yes");
+}
+void yes_button(){
+    drawShape(SDL_GetColour(dark_grey), NO_POS_X, BT_POS_Y, BT_SIZE_W, BT_SIZE_H);
+    drawButton(appFonts.fntButtonBig, BUTTON_B, (NO_POS_X+50), (BT_POS_Y+15), SDL_GetColour(grey));
+    drawText(appFonts.fntMedium, (NO_POS_X+97), (BT_POS_Y+15), SDL_GetColour(grey), "No");
+}
+void ok_button(){
+    drawShape(SDL_GetColour(dark_grey), OK_POS_X, BT_POS_Y, BT_SIZE_W, BT_SIZE_H);
+    drawButton(appFonts.fntButtonBig, BUTTON_A, (OK_POS_X+50), (BT_POS_Y+15), SDL_GetColour(grey));
+    drawText(appFonts.fntMedium, (OK_POS_X+97), (BT_POS_Y+15), SDL_GetColour(grey), "OK");
 }
 
 int yesNoBox(int cursor, int x, int y, char *question)
 {
     printOptionList(cursor);
-    popUpBox(appFonts.fntMedium, x, y, SDL_GetColour(white), question);
-    // highlight box.
-    drawShape(SDL_GetColour(faint_blue), 380, 410, 175, 65);
-    drawShape(SDL_GetColour(faint_blue), 700, 410, 190, 65);
-    // option text.
-    drawButton(appFonts.fntButtonBig, BUTTON_B, 410, 425, SDL_GetColour(white));
-    drawText(appFonts.fntMedium, 455, 425, SDL_GetColour(white), "No");
-    drawButton(appFonts.fntButtonBig, BUTTON_A, 725, 425, SDL_GetColour(white));
-    drawText(appFonts.fntMedium, 770, 425, SDL_GetColour(white), "Yes");
+    popUpBox(appFonts.fntMedium, x, y, SDL_GetColour(black), question);
 
+    no_button();
+    yes_button();
     updateRenderer();
 
     int res = 0;
@@ -121,7 +131,7 @@ int yesNoBox(int cursor, int x, int y, char *question)
 
 void errorBox(int x, int y, char *errorText)
 {
-    popUpBox(appFonts.fntMedium, x, y, SDL_GetColour(white), errorText);
+    popUpBox(appFonts.fntMedium, x, y, SDL_GetColour(black), errorText);
     drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
     updateRenderer();
 

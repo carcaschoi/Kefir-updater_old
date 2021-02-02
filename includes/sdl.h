@@ -12,22 +12,22 @@
 #define SCREEN_W    1280                                                            //width of the window
 #define SCREEN_H    720                                                             //hight of the window
 
-#define white       0
-#define grey        1
-#define black       2
-#define pink        3
-#define orange      4
-#define yellow      5
-#define brown       6
-#define red         7
-#define green       8
-#define light_blue  9
-#define blue        10
-#define dark_blue   11
-#define purple      12
-#define dark_grey   13
-#define jordy_blue  14
-#define faint_blue  15
+#define black            0
+#define faint_blue       1
+#define white            2
+#define pink             3
+#define orange           4
+#define yellow           5
+#define brown            6
+#define red              7
+#define green            8
+#define light_blue       9
+#define blue             10
+#define dark_blue        11
+#define purple           12
+#define dark_grey        13
+#define not_so_dark_grey 14
+#define grey             15
 
 // buttons from NintendoExt
 #define BUTTON_A            0xE0E0
@@ -55,12 +55,12 @@
 
 typedef struct
 {
-    TTF_Font *fntSmall, *fntMedium, *fntLarge, *fntButton, *fntButtonBig;
+    TTF_Font *fntTiny, *fntSmall, *fntMedium, *fntMedium_small, *fntLarge, *fntButton, *fntButtonBig;
 } AppFonts;
 
 typedef struct
 {
-    SDL_Texture *background, *app_icon, *ams_icon, *hekate_icon, *patch_icon, *reboot_icon, *error_icon;
+    SDL_Texture *background, *app_icon, *ams_icon, *ams_plus_icon, *reboot_icon, *hekate_icon, *error_icon;
 } AppTextures;
 
 extern AppFonts appFonts;
