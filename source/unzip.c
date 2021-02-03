@@ -44,26 +44,29 @@ int unzip(const char *output, int cursor)
 
         else
         {
-            char write_filename[56];
+            // const int MAX_LENGTH = 45;
+            // const int LAST_PART = MAX_LENGTH / 2 - 5;
+            char write_filename[46];
+            // const char FILLER[5] = " ... ";
 
-            if (strlen(filename_inzip) <= 60)
+            if (strlen(filename_inzip) < 50)
             {
-                strncpy(write_filename, filename_inzip, 55);
-                write_filename[55] = '\0';
+                strncpy(write_filename, filename_inzip, 44);
+                write_filename[45] = '\0';
             }
             else
             {
-                strncpy(write_filename, filename_inzip, 25);
-                strncpy(&(write_filename[25]), " ... ", 5);
-                strncpy(&(write_filename[30]), &(filename_inzip[strlen(filename_inzip) - 24]), 25);
-                write_filename[55] = '\0';
+                strncpy(write_filename, filename_inzip, 22);
+                strncpy(&(write_filename[22]), " ... ", 5);
+                strncpy(&(write_filename[27]), &(filename_inzip[strlen(filename_inzip) - 18]), 19);
+                write_filename[45] = '\0';
             }
 
             void *buf = malloc(WRITEBUFFERSIZE);
 
             FILE *outfile = fopen(write_filename, "wb");
 
-            drawText(appFonts.fntTiny, POS_X, POS_Y + 100, SDL_GetColour(black), write_filename);
+            drawText(appFonts.fntTiny, POS_X - 50, POS_Y + 100, SDL_GetColour(black), write_filename);
 
             for (int j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE); j > 0; j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE))
                 fwrite(buf, 1, j, outfile);
