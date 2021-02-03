@@ -9,7 +9,7 @@
 #include "menu.h"
 
 #define WRITEBUFFERSIZE 500000 // 500KB
-#define MAXFILENAME     256
+#define MAXFILENAME 256
 
 int unzip(const char *output, int cursor)
 {
@@ -28,30 +28,42 @@ int unzip(const char *output, int cursor)
         unzOpenCurrentFile(zfile);
         unzGetCurrentFileInfo(zfile, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
 
-
         // check if the string ends with a /, if so, then its a directory.
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
         {
             // check if directory exists
             DIR *dir = opendir(filename_inzip);
-            if (dir) closedir(dir);
+            if (dir)
+                closedir(dir);
             else
             {
-                drawText(appFonts.fntTiny, POS_X, POS_Y+100, SDL_GetColour(black), filename_inzip);
+                drawText(appFonts.fntTiny, POS_X, POS_Y + 100, SDL_GetColour(black), filename_inzip);
                 mkdir(filename_inzip, 0777);
             }
         }
 
         else
         {
-            const char *write_filename = filename_inzip;
-            // strncpy(write_filename, filename_inzip, 50)
+            char write_filename[56];
+
+            if (strlen(filename_inzip) <= 60)
+            {
+                strncpy(write_filename, filename_inzip, 55);
+                write_filename[55] = '\0';
+            }
+            else
+            {
+                strncpy(write_filename, filename_inzip, 25);
+                strncpy(&(write_filename[25]), " ... ", 5);
+                strncpy(&(write_filename[30]), &(filename_inzip[strlen(filename_inzip) - 24]), 25);
+                write_filename[55] = '\0';
+            }
 
             void *buf = malloc(WRITEBUFFERSIZE);
 
             FILE *outfile = fopen(write_filename, "wb");
 
-            drawText(appFonts.fntTiny, POS_X, POS_Y+100, SDL_GetColour(black), write_filename);
+            drawText(appFonts.fntTiny, POS_X, POS_Y + 100, SDL_GetColour(black), write_filename);
 
             for (int j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE); j > 0; j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE))
                 fwrite(buf, 1, j, outfile);
@@ -60,11 +72,9 @@ int unzip(const char *output, int cursor)
             free(buf);
         }
 
-        
-
         updateRenderer();
 
-        jump_to_end: // goto
+    jump_to_end: // goto
         unzCloseCurrentFile(zfile);
         unzGoToNextFile(zfile);
     }
