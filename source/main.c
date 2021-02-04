@@ -118,10 +118,10 @@ int main(int argc, char **argv)
                     update_kefir(cursor);
                 break;
 
-            case UP_APP:
-                if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
-                    update_app();
-                break;
+            // case UP_APP:
+            //     if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
+            //         update_app();
+            //     break;
 
             case REBOOT_PAYLOAD:
                 if (yesNoBox(cursor, 390, 250, "Reboot to Payload?") == YES)

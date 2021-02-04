@@ -39,14 +39,12 @@ void printOptionList(int cursor)
     refreshScreen(/*loaded=*/1);
 
     char *option_list[]      = {    "Update kefir", \
-                                    "Update app", \
                                     "Reboot (reboot to payload)" };
 
     char *description_list[] = {    "Update kefir to latest", \
-                                    "Updates app. Restart app to apply.", \
                                     "Reboots switch to your current reboot payload." };
 
-    SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.app_icon, appTextures.reboot_icon };
+    SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.reboot_icon };
 
     for (int i=0, nl=0; i < (CURSOR_LIST_MAX+1); i++, nl+=NEWLINE)
     {

@@ -44,23 +44,23 @@ int unzip(const char *output, int cursor)
 
         else
         {
-            // const int MAX_LENGTH = 45;
-            // const int LAST_PART = MAX_LENGTH / 2 - 5;
-            char write_filename[46];
-            // const char FILLER[5] = " ... ";
+            char write_filename[40];
 
-            if (strlen(filename_inzip) < 50)
-            {
-                strncpy(write_filename, filename_inzip, 44);
-                write_filename[45] = '\0';
-            }
-            else
-            {
-                strncpy(write_filename, filename_inzip, 22);
-                strncpy(&(write_filename[22]), " ... ", 5);
-                strncpy(&(write_filename[27]), &(filename_inzip[strlen(filename_inzip) - 18]), 19);
-                write_filename[45] = '\0';
-            }
+            strncpy(write_filename, filename_inzip, 40);
+            write_filename[39] = '\0';
+
+            // if (strlen(filename_inzip) < 50)
+            // {
+            //     strncpy(write_filename, filename_inzip, 44);
+            //     write_filename[45] = '\0';
+            // }
+            // else
+            // {
+            //     strncpy(write_filename, filename_inzip, 22);
+            //     strncpy(&(write_filename[22]), " ... ", 5);
+            //     strncpy(&(write_filename[27]), &(filename_inzip[strlen(filename_inzip) - 18]), 19);
+            //     write_filename[45] = '\0';
+            // }
 
             void *buf = malloc(WRITEBUFFERSIZE);
 
@@ -77,7 +77,6 @@ int unzip(const char *output, int cursor)
 
         updateRenderer();
 
-    jump_to_end: // goto
         unzCloseCurrentFile(zfile);
         unzGoToNextFile(zfile);
     }

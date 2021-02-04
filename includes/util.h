@@ -28,6 +28,6 @@ void copyFile(char *src, char *dest);                                   // basic
 int parseSearch(char *phare_string, char *filter, char* new_string);    // hacky way to parse a file for a string
 // void update_hekate();                                                   // update hekate
 void update_kefir(int cursor);                                     // update sigpatches
-void update_app();                                                      // update the app
+// void update_app();                                                      // update the app
 
 #endif
