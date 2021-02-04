@@ -60,7 +60,7 @@ typedef struct
 
 typedef struct
 {
-    SDL_Texture *background, *app_icon, *ams_icon, *ams_plus_icon, *reboot_icon, *hekate_icon, *error_icon;
+    SDL_Texture *background, *app_icon, *ams_icon, *ams_plus_icon, *reboot_icon, *hekate_icon, *error_icon, *download_icon, *info_icon;
 } AppTextures;
 
 extern AppFonts appFonts;

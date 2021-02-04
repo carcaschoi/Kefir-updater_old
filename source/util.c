@@ -150,7 +150,7 @@ int parseSearch(char *parse_string, char *filter, char *new_string)
 void update_kefir(int cursor)
 {
     popUpBox(appFonts.fntMedium, 350, 250, SDL_GetColour(white), "Downloading kefir...");
-    drawImageScale(appTextures.error_icon, 570, 340, 128, 128);
+    drawImageScale(appTextures.download_icon, 570, 340, 128, 128);
     updateRenderer();
     unzip(KEFIR_OUTPUT, cursor);
 
@@ -158,7 +158,7 @@ void update_kefir(int cursor)
     // {
     //     unzip(KEFIR_OUTPUT, cursor);
     //     remove(KEFIR_OUTPUT);
-    //     errorBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
+    //     infoBox(400, 250, "      Update complete!\nReboot Switch to take effect!");
     //     if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
     //     reboot_payload("/payload.bin");
     // }

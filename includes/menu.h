@@ -25,5 +25,6 @@ void printOptionList(int cursor);                                           // p
 void popUpBox(TTF_Font *font, int x, int y, SDL_Colour colour, char *text); // pop-up box in center of screen
 int yesNoBox(int cursor, int x, int y, char *question);                     // box with yes or no option
 void errorBox(int x, int y, char *errorText);                               // used for displaying error messages
+void infoBox(int x, int y, char *errorText);                               // used for displaying error messages
 
 #endif

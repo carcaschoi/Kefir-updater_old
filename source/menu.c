@@ -135,3 +135,12 @@ void errorBox(int x, int y, char *errorText)
 
     sleep(3);
 }
+
+void infoBox(int x, int y, char *errorText)
+{
+    popUpBox(appFonts.fntMedium, x, y, SDL_GetColour(black), errorText);
+    drawImageScale(appTextures.info_icon, 570, 340, 128, 128);
+    updateRenderer();
+
+    sleep(3);
+}

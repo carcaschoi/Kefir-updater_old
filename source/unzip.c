@@ -44,23 +44,19 @@ int unzip(const char *output, int cursor)
 
         else
         {
-            char write_filename[40];
+            char write_filename[50];
 
-            strncpy(write_filename, filename_inzip, 40);
-            write_filename[39] = '\0';
-
-            // if (strlen(filename_inzip) < 50)
-            // {
-            //     strncpy(write_filename, filename_inzip, 44);
-            //     write_filename[45] = '\0';
-            // }
-            // else
-            // {
-            //     strncpy(write_filename, filename_inzip, 22);
-            //     strncpy(&(write_filename[22]), " ... ", 5);
-            //     strncpy(&(write_filename[27]), &(filename_inzip[strlen(filename_inzip) - 18]), 19);
-            //     write_filename[45] = '\0';
-            // }
+            if (strlen(filename_inzip) < 45)
+            {
+                strncpy(write_filename, filename_inzip, 44);
+                write_filename[44] = '\0';
+            }
+            else
+            {
+                strncpy(write_filename, filename_inzip, 41);
+                strcat(write_filename, "...");
+                write_filename[44] = '\0';
+            }
 
             void *buf = malloc(WRITEBUFFERSIZE);
 

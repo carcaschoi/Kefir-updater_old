@@ -130,10 +130,12 @@ void loadTextures()
 {
     imageLoad(&appTextures.background,      "romfs:/ams_background.png");
     imageLoad(&appTextures.ams_icon,        "romfs:/ams_icon.png");
-    imageLoad(&appTextures.hekate_icon,     "romfs:/hekate_icon.png");
-    imageLoad(&appTextures.app_icon,      "romfs:/app_icon.png");
+    // imageLoad(&appTextures.hekate_icon,   "romfs:/hekate_icon.png");
+    // imageLoad(&appTextures.app_icon,      "romfs:/app_icon.png");
     imageLoad(&appTextures.reboot_icon,     "romfs:/reboot_icon.png");
     imageLoad(&appTextures.error_icon,      "romfs:/error_icon.png");
+    imageLoad(&appTextures.download_icon,   "romfs:/download_icon.png");
+    imageLoad(&appTextures.info_icon,       "romfs:/info_icon.png");
 }
 
 void destroyTextures()
@@ -146,10 +148,12 @@ void destroyTextures()
 
     SDL_DestroyTexture(appTextures.background);
     SDL_DestroyTexture(appTextures.ams_icon);
-    SDL_DestroyTexture(appTextures.hekate_icon);
-    SDL_DestroyTexture(appTextures.app_icon);
+    // SDL_DestroyTexture(appTextures.hekate_icon);
+    // SDL_DestroyTexture(appTextures.app_icon);
     SDL_DestroyTexture(appTextures.reboot_icon);
     SDL_DestroyTexture(appTextures.error_icon);
+    SDL_DestroyTexture(appTextures.download_icon);
+    SDL_DestroyTexture(appTextures.info_icon);
 }
 
 void sdlInit()
