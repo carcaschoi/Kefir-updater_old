@@ -17,10 +17,10 @@ int touch_cursor(int x, int y)
 int touch_yes_no_option(int x, int y)
 {
     if (x > 380 && x < 555 && y > 410 && y < 475)
-        return NO;
+        return YES;
 
     if (x > 700 && x < 890 && y > 410 && y < 475)
-        return YES;
+        return NO;
 
     return 1;
 }

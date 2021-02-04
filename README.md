@@ -1,16 +1,16 @@
-# Atmosphere-Updater
+# Kefir Updater
 
-Update Atmosphere patches from within your switch!
+Update [Kefir](https://github.com/rashevskyv/kefir/) directly from console
 
-![Img](images/example.jpg)
+![Img](images/menu.jpg)
 
 ----
 
 ## Install
 
-Download the latest release from [here](https://github.com/JackInTheShop/kefirupdater/releases).
+Download the latest release from [here](https://github.com/rashevskyv/kefirupdater/releases).
 
-Move the downloaded .nro onto you Nintendo Switch SD Card inside the folder **/switch/kefirupdater/**.
+Move the downloaded `.nro` onto you Nintendo Switch SD Card inside the folder **/switch/kefirupdater/**.
 
 That's it!
 
@@ -18,29 +18,20 @@ That's it!
 
 ## Usage
 
-__**The app currently has 4 main options.**__
+__**The app currently has 2 options.**__
 
-**Update Atmosphere patches:**
+**Update Kefir:**
 
-* Downloads the latest Atmosphere patches. 
-* It is no longer possible to update Atmosphere while you are running Atmosphere. [Atmosphere now maintains exclusive access to fusee-secondary archive.](https://github.com/Atmosphere-NX/Atmosphere/commit/5b02c77400e8551199fefdbc36b1eb3ff86374dc)
+* Downloads the latest [Kefir](https://github.com/rashevskyv/kefir/releases) release. 
 
-**Update Hekate:**
-
-* Installs the latest release of Hekate. The UMS feature may be a convenient way to update Atmosphere now.
-* Offers to replace your **/atmosphere/reboot_payload.bin** with Hekate, making Atmosphere reboot to Hekate. It will offer to copy your current **/atmosphere/reboot_payload.bin** to **/bootloader/payloads/reboot_payload.bin** in order to avoid booting to hekate after install with no payloads. If you ran **Update Atmosphere + sigpatches** first, **/atmosphere/reboot_payload.bin** is the latest **fusee-primary.bin**.
-
-![Img](images/reboot_hekate.jpg)
-
-**Update App:**
-
-* Downloads the latest version of this app!
-* Deletes the previous old version.
+![Img](images/update.jpg)
 
 **Reboot (reboot to payload):**
 
-* Reboots the switch, loading the payload from **/atmosphere/reboot_payload.bin**.
+* Reboots the switch, loading the payload from **/payload.bin**.
 * This is recommended after install Atmosphere.
+
+![Img](images/reboot.jpg)
 
 ----
 
@@ -50,6 +41,7 @@ Install the devkitpro tool chain from [here](https://devkitpro.org/wiki/Getting_
 
  Using pacman (installed with devkitpro) install the following libraries:
 * [switch-ex-curl](https://www.github.com/eXhumer/switch-ex-curl/)
+	* `sudo dkp-pacman -U https://github.com/eXhumer/switch-ex-curl/releases/download/v7.69.1-3/switch-ex-curl-7.69.1-3-any.pkg.tar.zst`
 * switch-freetype
 * switch-sdl2
 * switch-sdl2_gfx
@@ -61,16 +53,22 @@ If you have any problems building, feel free to open an issue including any buil
  
 ----
 
+## TODO
+
+1. Download firmware 
+1. Redisign
+1. Refactoring
+
+----
+
 ## Special Thanks!
 
-[ITotalJustice](ITotalJustice) for originally developing the app.
-
-[eXhumer](eXhumer) for recently updating the app with libnx 3.2.0 support, notably adding sigpatches support and the BCT.ini prompt. 
-
+[ITotalJustice](https://github.com/ITotalJustice) for originally developing the app.
+[JackInTheShop](https://github.com/JackInTheShop) for fork that I forked.
+[eXhumer](https://github.com/eXhumer) for recently updating the app with libnx 3.2.0 support, notably adding sigpatches support and the BCT.ini prompt. 
 [toph](https://github.com/sudot0ph) for the design of the app icon, as well as the most icons used within the app!
-
 [Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus and error icon (and the idea for this app)!
-
 [bandithedoge](https://github.com/bandithedoge) for the background!
-
 [KrankRival](https://github.com/KranKRival) for the initial sys / ams version pr (and for motivating me to work on touch controls)!
+[duckbill](https://github.com/duckbill007) for proper realloc realisation. 
+[developersu](https://github.com/developersu) for remove directory realisation.

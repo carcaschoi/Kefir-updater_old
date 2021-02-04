@@ -12,7 +12,7 @@ void refreshScreen(char loaded)
     clearRenderer();
 
     // app version.
-    drawText(appFonts.fntMedium, 40, 40, SDL_GetColour(black), APP_VERSION);
+    drawText(appFonts.fntMedium, 40, 25, SDL_GetColour(black), APP_VERSION);
 
     // system version.
     drawText(appFonts.fntSmall, 25, 150, SDL_GetColour(black), getSysVersion());
@@ -23,14 +23,14 @@ void refreshScreen(char loaded)
     if (loaded)
     {
       // write the latest version number, if an update is available
-      drawText(appFonts.fntSmall, 25, 260, SDL_GetColour(black), getLatestKefirVersion());
+      drawText(appFonts.fntSmall, 25, 250, SDL_GetColour(black), getLatestKefirVersion());
 
       //drawText(appFonts.fntMedium, 120, 225, SDL_GetColour(black), "Menu Here"); // menu options
-      drawButton(appFonts.fntButton, BUTTON_A, 970, 672, SDL_GetColour(black));
-      drawText(appFonts.fntSmall, 1010, 675, SDL_GetColour(black), "Select");
+      drawButton(appFonts.fntButton, BUTTON_A, 940, 672, SDL_GetColour(black));
+      drawText(appFonts.fntSmall, 980, 673, SDL_GetColour(black), "Select");
 
-      drawButton(appFonts.fntButton, BUTTON_PLUS, 1145, 672, SDL_GetColour(black));
-      drawText(appFonts.fntSmall, 1185, 675, SDL_GetColour(black), "Exit");
+      drawButton(appFonts.fntButton, BUTTON_PLUS, 1115, 672, SDL_GetColour(black));
+      drawText(appFonts.fntSmall, 1155, 673, SDL_GetColour(black), "Exit");
     }
 }
 
@@ -38,8 +38,8 @@ void printOptionList(int cursor)
 {
     refreshScreen(/*loaded=*/1);
 
-    char *option_list[]      = {    "Update kefir", \
-                                    "Reboot (reboot to payload)" };
+    char *option_list[]      = {    "Update Kefir", \
+                                    "Reboot console" };
 
     char *description_list[] = {    "Update kefir to latest", \
                                     "Reboots switch to your current reboot payload." };
@@ -48,7 +48,7 @@ void printOptionList(int cursor)
 
     for (int i=0, nl=0; i < (CURSOR_LIST_MAX+1); i++, nl+=NEWLINE)
     {
-        if (cursor != i) drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(black), option_list[i]);
+        if (cursor != i) drawText(appFonts.fntMedium, 555, FIRST_LINE+nl, SDL_GetColour(black), option_list[i]);
         else
         {
             // icon for the option selected.
@@ -56,9 +56,9 @@ void printOptionList(int cursor)
             // highlight box.
             drawShape(SDL_GetColour(dark_grey), 530, (FIRST_LINE + nl - HIGHLIGHT_BOX_MIN), 700, HIGHLIGHT_BOX_MAX);
             // option text.
-            drawText(appFonts.fntSmall, 550, FIRST_LINE+nl, SDL_GetColour(grey), option_list[i]);
+            drawText(appFonts.fntMedium, 555, FIRST_LINE+nl, SDL_GetColour(grey), option_list[i]);
             // description.
-            drawText(appFonts.fntSmall, 25, 675, SDL_GetColour(black), description_list[i]);
+            drawText(appFonts.fntSmall, 25, 670, SDL_GetColour(black), description_list[i]);
         }
     }
 }

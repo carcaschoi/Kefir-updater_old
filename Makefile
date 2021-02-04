@@ -37,9 +37,9 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   of a homebrew executable (.nro). This is intended to be used for sysmodules.
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
-APP_TITLE   := Kefir-Updater
-APP_AUTHOR  := JITS
-APP_VERSION := 1.0.4
+APP_TITLE   := Kefir Updater
+APP_AUTHOR  := xHR
+APP_VERSION := 1.0.0
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
