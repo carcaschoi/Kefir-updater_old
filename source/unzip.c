@@ -32,6 +32,7 @@ int unzip(const char *output, int cursor)
         if ((filename_inzip[strlen(filename_inzip) - 1]) == '/')
         {
             // check if directory exists
+
             DIR *dir = opendir(filename_inzip);
             if (dir)
                 closedir(dir);
@@ -44,25 +45,25 @@ int unzip(const char *output, int cursor)
 
         else
         {
-            char write_filename[50];
+            char display_filename[44];
+            const char *write_filename = filename_inzip;
 
-            if (strlen(filename_inzip) < 45)
+            if (strlen(filename_inzip) < 44)
             {
-                strncpy(write_filename, filename_inzip, 44);
-                write_filename[44] = '\0';
+                strncpy(display_filename, filename_inzip, 43);
+                display_filename[43] = '\0';
             }
             else
             {
-                strncpy(write_filename, filename_inzip, 41);
-                strcat(write_filename, "...");
-                write_filename[44] = '\0';
+                strncpy(display_filename, filename_inzip, 40);
+                strcat(display_filename, "...");
+                display_filename[43] = '\0';
             }
 
             void *buf = malloc(WRITEBUFFERSIZE);
-
             FILE *outfile = fopen(write_filename, "wb");
 
-            drawText(appFonts.fntTiny, POS_X - 50, POS_Y + 100, SDL_GetColour(black), write_filename);
+            drawText(appFonts.fntTiny, POS_X - 50, POS_Y + 100, SDL_GetColour(black), display_filename);
 
             for (int j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE); j > 0; j = unzReadCurrentFile(zfile, buf, WRITEBUFFERSIZE))
                 fwrite(buf, 1, j, outfile);

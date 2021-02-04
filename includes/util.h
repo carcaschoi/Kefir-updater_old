@@ -5,7 +5,7 @@
 #define APP_PATH                "/switch/kefirupdater/"
 #define AMS_OUTPUT              "/switch/kefirupdater/ams.zip"
 #define HEKATE_OUTPUT           "/switch/kefirupdater/hekate.zip"
-#define KEFIR_OUTPUT            "/switch/kefirupdater/kefir.zip"
+#define KEFIR_OUTPUT            "/switch/kefirupdater/atmo.zip"
 #define KEF_LOCAL               "/switch/kefirupdater/version"
 #define APP_OUTPUT              "/switch/kefirupdater/kefirupdater.nro"
 #define OLD_APP_PATH            "/switch/kefirupdater.nro"
