@@ -4,8 +4,8 @@
 #include "sdl.h"
 
 #define CURSOR_LIST_MAX     1
-#define HIGHLIGHT_BOX_MIN   20
-#define HIGHLIGHT_BOX_MAX   70
+#define HIGHLIGHT_BOX_MIN   27
+#define HIGHLIGHT_BOX_MAX   90
 #define NEWLINE             110
 #define FIRST_LINE          130
 #define MAX_STRLEN          512
