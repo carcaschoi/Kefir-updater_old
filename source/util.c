@@ -60,7 +60,7 @@ void writeKefVersion()
     }
     fclose(fp);
 
-    snprintf(g_kefVersion, sizeof(g_kefVersion), "Kefir version: %s", kefir_local);
+    snprintf(g_kefVersion, sizeof(g_kefVersion), "Current Kefir version: %s", kefir_local);
 }
 
 void writeLatestKefirVersion()
@@ -74,7 +74,7 @@ void writeLatestKefirVersion()
         if (!parseSearch(TEMP_FILE, VERSION_FILTER_STRING, latestVersionNumber))
         {
             char buffer[50];
-            snprintf(buffer, sizeof(buffer), "     - Update available: %s", latestVersionNumber);
+            snprintf(buffer, sizeof(buffer), "Latest Kefir version: %s", latestVersionNumber);
 
             // char kefirUpdateString = "kefir%s available. Update?", latestVersionNumber;
 
@@ -240,6 +240,7 @@ void remove_old()
     remove_entry("/sxos/sx");
 
     remove("/hbmenu.nro");
+    remove("/install.bat");
     remove("/switch/checkpoint.nro");
     remove("/switch/checkpoint/checkpoint.nro");
     remove("/switch/pplay.nro");
