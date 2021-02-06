@@ -28,7 +28,7 @@ __**The app currently has 2 options.**__
 
 ![Img](images/update.jpg)
 
-**Reboot (reboot to payload):**
+**Reboot Console:**
 
 * Reboots the switch, loading the payload from **/payload.bin**.
 * This is recommended after install Atmosphere.
