@@ -240,6 +240,7 @@ void remove_old()
     remove_entry("/sxos/sx");
 
     remove("/hbmenu.nro");
+    remove("/install.bat");
     remove("/switch/checkpoint.nro");
     remove("/switch/checkpoint/checkpoint.nro");
     remove("/switch/pplay.nro");

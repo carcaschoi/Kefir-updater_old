@@ -19,29 +19,29 @@ int appInit()
 {
     Result rc;
 
-    if (R_FAILED(rc = socketInitializeDefault()))           // for curl / nxlink.
+    if (R_FAILED(rc = socketInitializeDefault())) // for curl / nxlink.
         printf("socketInitializeDefault() failed: 0x%x.\n\n", rc);
 
-    #ifdef DEBUG
-    if (R_FAILED(rc = nxlinkStdio()))                       // redirect all printout to console window.
+#ifdef DEBUG
+    if (R_FAILED(rc = nxlinkStdio())) // redirect all printout to console window.
         printf("nxlinkStdio() failed: 0x%x.\n\n", rc);
-    #endif
+#endif
 
-    if (R_FAILED(rc = setsysInitialize()))                  // for system version
+    if (R_FAILED(rc = setsysInitialize())) // for system version
         printf("setsysInitialize() failed: 0x%x.\n\n", rc);
 
-    if (R_FAILED(rc = splInitialize()))                     // for atmosphere version
+    if (R_FAILED(rc = splInitialize())) // for atmosphere version
         printf("splInitialize() failed: 0x%x.\n\n", rc);
 
-    if (R_FAILED(rc = plInitialize(PlServiceType_User)))    // for shared fonts.
+    if (R_FAILED(rc = plInitialize(PlServiceType_User))) // for shared fonts.
         printf("plInitialize() failed: 0x%x.\n\n", rc);
 
-    if (R_FAILED(rc = romfsInit()))                         // load textures from app.
+    if (R_FAILED(rc = romfsInit())) // load textures from app.
         printf("romfsInit() failed: 0x%x.\n\n", rc);
 
-    sdlInit();                                              // int all of sdl and start loading textures.
+    sdlInit(); // int all of sdl and start loading textures.
 
-    romfsExit();                                            // exit romfs after loading sdl as we no longer need it.
+    romfsExit(); // exit romfs after loading sdl as we no longer need it.
 
     return 0;
 }
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
     touchPosition touch;
 
     // muh loooooop
-    while(appletMainLoop())
+    while (appletMainLoop())
     {
         // scan for button / touch input each frame.
         hidScanInput();
@@ -92,15 +92,19 @@ int main(int argc, char **argv)
         // move cursor down...
         if (kDown & KEY_DOWN)
         {
-            if (cursor == CURSOR_LIST_MAX) cursor = 0;
-            else cursor++;
+            if (cursor == CURSOR_LIST_MAX)
+                cursor = 0;
+            else
+                cursor++;
         }
 
         // move cursor up...
         if (kDown & KEY_UP)
         {
-            if (cursor == 0) cursor = CURSOR_LIST_MAX;
-            else cursor--;
+            if (cursor == 0)
+                cursor = CURSOR_LIST_MAX;
+            else
+                cursor--;
         }
 
         // select option
@@ -118,10 +122,10 @@ int main(int argc, char **argv)
                     update_kefir(cursor);
                 break;
 
-            // case UP_APP:
-            //     if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
-            //         update_app();
-            //     break;
+                // case UP_APP:
+                //     if (yesNoBox(cursor, 390, 250, "Update App?") == YES)
+                //         update_app();
+                //     break;
 
             case REBOOT_PAYLOAD:
                 if (yesNoBox(cursor, 390, 250, "Reboot to Payload?") == YES)
@@ -135,8 +139,10 @@ int main(int argc, char **argv)
             break;
 
         // lock touch if the user has already touched the screen (touch tap).
-        if (touch_count > 0) touch_lock = ON;
-        else touch_lock = OFF;
+        if (touch_count > 0)
+            touch_lock = ON;
+        else
+            touch_lock = OFF;
 
         // display render buffer
         updateRenderer();
