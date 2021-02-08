@@ -68,7 +68,7 @@ void writeLatestKefirVersion()
     // Download the github API file and then parse out the version number.
     char *updateString = "- Up to date";
 
-    if (!downloadFile(AMS_URL, TEMP_FILE, ON))
+    if (!downloadFile(KEF_URL, TEMP_FILE, ON))
     {
         char latestVersionNumber[10];
         if (!parseSearch(TEMP_FILE, VERSION_FILTER_STRING, latestVersionNumber))
@@ -246,6 +246,9 @@ void remove_old()
     remove("/switch/pplay.nro");
     remove("/switch/NX-SHELL.nro");
     remove("/switch/kefirupdater/kefirupdater.nro");
+    remove("/switch/kefirupdater.nro");
+    remove("/switch/kefirupdater/kefir-updater.nro");
+    remove("/switch/kefir-updater.nro");
     remove("/switch/reboot_to_payload.nro");
     remove("/switch/NxThemesInstaller.nro");
     remove("/switch/NxThemesInstaller/NxThemesInstaller.nro");
@@ -344,10 +347,11 @@ void update_kefir(int cursor)
     {
         remove_old();
         unzip(KEFIR_OUTPUT, cursor);
+        remove("/install.bat");
         remove(KEFIR_OUTPUT);
-        infoBox(POS_X-10, POS_Y, "       Update complete!\nReboot Switch to take effect!");
+        infoBox(POS_X - 10, POS_Y, "       Update complete!\nReboot Switch to take effect!");
         if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
-        reboot_payload("/payload.bin");
+            reboot_payload("/payload.bin");
     }
 }
 
