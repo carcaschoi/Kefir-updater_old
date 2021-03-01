@@ -204,12 +204,12 @@ If you have any problems building, feel free to open an issue including any buil
 
 ## Special Thanks!
 
-[ITotalJustice](https://github.com/ITotalJustice) for originally developing the app.
-[JackInTheShop](https://github.com/JackInTheShop) for fork that I forked.
-[eXhumer](https://github.com/eXhumer) for recently updating the app with libnx 3.2.0 support, notably adding sigpatches support and the BCT.ini prompt. 
-[toph](https://github.com/sudot0ph) for the design of the app icon, as well as the most icons used within the app!
-[Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus and error icon (and the idea for this app)!
-[bandithedoge](https://github.com/bandithedoge) for the background!
-[KrankRival](https://github.com/KranKRival) for the initial sys / ams version pr (and for motivating me to work on touch controls)!
-[duckbill](https://github.com/duckbill007) for proper realloc realisation. 
-[developersu](https://github.com/developersu) for remove directory realisation.
+* [ITotalJustice](https://github.com/ITotalJustice) for originally developing the app.
+* [JackInTheShop](https://github.com/JackInTheShop) for fork that I forked.
+* [eXhumer](https://github.com/eXhumer) for recently updating the app with libnx 3.2.0 support, notably adding sigpatches support and the BCT.ini prompt. 
+* [toph](https://github.com/sudot0ph) for the design of the app icon, as well as the most icons used within the app!
+* [Black Rabbit](https://github.com/BlackRabbit22) for the design of the plus and error icon (and the idea for this app)!
+* [bandithedoge](https://github.com/bandithedoge) for the background!
+* [KrankRival](https://github.com/KranKRival) for the initial sys / ams version pr (and for motivating me to work on touch controls)!
+* [duckbill](https://github.com/duckbill007) for proper realloc realisation. 
+* [developersu](https://github.com/developersu) for remove directory realisation.
