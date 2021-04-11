@@ -219,6 +219,10 @@ void remove_old()
     remove_entry("/atmosphere/contents/010000000007E51A");
     remove_entry("/atmosphere/contents/420000000007E51A");
     remove_entry("/atmosphere/contents/0100000000001000");
+    remove_entry("/atmosphere/contents/010000000000100C");
+    remove_entry("/atmosphere/contents/0000000000534C56");
+    remove_entry("/atmosphere/contents/010000000000bd00");
+    remove("/atmosphere/stratosphere.romfs");
     remove_entry("/sxos/titles/");
     remove_entry("/sxos/bootloader");
     remove_entry("/sxos/switch");
@@ -261,6 +265,7 @@ void remove_old()
     remove("/switch/daybreak/daybreak.nro");
     remove("/switch/nx-ntpc.nro");
     remove("/switch/dbi.nro");
+    remove("/switch/.DBI.nro.star");
     remove("/switch/dbi/dbi.nro");
     remove("/switch/nxmtp.nro");
     remove("/switch/NX-Activity-Log.nro");
