@@ -5,7 +5,7 @@
 #include "touch.h"
 #include "util.h"
 
-#define APP_VERSION "Kefir Updater: 1.0.4"
+#define APP_VERSION "ShallowSea Updater: 1.0.0"
 
 void refreshScreen(char loaded)
 {
@@ -38,10 +38,10 @@ void printOptionList(int cursor)
 {
     refreshScreen(/*loaded=*/1);
 
-    char *option_list[]      = {    "Update Kefir", \
+    char *option_list[]      = {    "Update ShallowSea", \
                                     "Reboot console" };
 
-    char *description_list[] = {    "Update kefir to latest", \
+    char *description_list[] = {    "Update ShallowSea to latest", \
                                     "Reboots switch to your current reboot payload." };
 
     SDL_Texture *textureArray[] = { appTextures.ams_icon, appTextures.reboot_icon };
