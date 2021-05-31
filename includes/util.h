@@ -2,13 +2,13 @@
 #define _UTIL_H_
 
 #define ROOT                    "/"
-#define APP_PATH                "/switch/kefirupdater/"
-#define AMS_OUTPUT              "/switch/kefirupdater/ams.zip"
-#define HEKATE_OUTPUT           "/switch/kefirupdater/hekate.zip"
-#define KEFIR_OUTPUT            "/switch/kefirupdater/kefir.zip"
-#define KEF_LOCAL               "/switch/kefirupdater/version"
-#define APP_OUTPUT              "/switch/kefirupdater/kefirupdater.nro"
-#define OLD_APP_PATH            "/switch/kefirupdater.nro"
+#define APP_PATH                "/switch/ShallowSea-updater/"
+#define AMS_OUTPUT              "/switch/ShallowSea-updater/ams.zip"
+#define HEKATE_OUTPUT           "/switch/ShallowSea-updater/hekate.zip"
+#define KEFIR_OUTPUT            "/switch/ShallowSea-updater/kefir.zip"
+#define KEF_LOCAL               "/switch/ShallowSea-updater/version"
+#define APP_OUTPUT              "/switch/ShallowSea-updater/ShallowSea-updater.nro"
+#define OLD_APP_PATH            "/switch/ShallowSea-updater.nro"
 
 #define YES                     10
 #define NO                      20
