@@ -356,7 +356,7 @@ void update_kefir(int cursor)
         remove(KEFIR_OUTPUT);
         infoBox(POS_X - 10, POS_Y, "       Update complete!\nReboot Switch to take effect!");
         if (yesNoBox(cursor, 390, 250, "Reboot console") == YES)
-            reboot_payload("/payload.bin");
+            reboot_payload("bootloader/payloads/TegraExplorer.bin");
     }
 }
 
