@@ -1,7 +1,7 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
-#define ROOT                    "/"
+#define ROOT                    "/ShallowSea-updater/"
 #define APP_PATH                "/switch/ShallowSea-updater/"
 #define AMS_OUTPUT              "/switch/ShallowSea-updater/ams.zip"
 #define HEKATE_OUTPUT           "/switch/ShallowSea-updater/hekate.zip"
