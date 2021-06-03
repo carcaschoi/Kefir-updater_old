@@ -350,7 +350,6 @@ void update_kefir(int cursor)
 
     if (!downloadFile(KEFIR_URL, KEFIR_OUTPUT, OFF))
     {
-        remove_old();
         unzip(KEFIR_OUTPUT, cursor);
         remove("/install.bat");
         remove(KEFIR_OUTPUT);
